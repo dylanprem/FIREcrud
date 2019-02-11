@@ -1,0 +1,26 @@
+{
+  "name": "firecrud",
+  "version": "1.0.0",
+  "description": "FIREcrud",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js --prefix server",
+    "server": "nodemon server.js --prefix server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanprem/FIREcrud.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanprem/FIREcrud/issues"
+  },
+  "homepage": "https://github.com/dylanprem/FIREcrud#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}

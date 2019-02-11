@@ -5,9 +5,20 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 // Firebase middleware
-const firebase = require("firebase");
-require("firebase/auth");
-require("firebase/database");
+const admin = require("firebase-admin");
+
+admin.initializeApp({
+  credential: admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    privateKey: process.env.ACCOUNT_KEY.replace(/\\n/g, "\n"),
+    clientEmail: process.env.CLIENT_EMAIL
+  }),
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGE_SENDER_ID
+});
 
 const GET_ROUTES = require("./routes/api/GET");
 const POST_ROUTES = require("./routes/api/POST");
@@ -20,17 +31,6 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
-
-//Firebase config
-const FIREBASE_CONFIG = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGE_SENDER_ID
-};
-firebase.initializeApp(FIREBASE_CONFIG);
 
 // Use Routes
 app.use("/api/GET", GET_ROUTES);
