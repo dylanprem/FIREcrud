@@ -10,8 +10,8 @@ class ListItems extends Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:5000/api/GET/").then(res => {
-      this.setState({ items: res.data });
+    axios.get(`http://localhost:5000/api/GET/`).then(response => {
+      console.log(response.data);
     });
   }
   render() {
