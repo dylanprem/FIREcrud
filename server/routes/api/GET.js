@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+//cors middleware
+const cors = require("cors");
+
 // Firebase
 const firebase = require("firebase-admin");
 const db = firebase.database();
@@ -13,20 +16,13 @@ router.get("/test", (req, res) => {
   res.json({ msg: "Test Route works" });
 });
 
+//options
+router.options("/", cors());
+
 // @route   GET api/GET/
 // @desc    Test route
 // @access  Public
-router.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", false);
+router.get("/", cors(), (req, res) => {
   itemsRef.on(
     "value",
     function(snapshot) {
