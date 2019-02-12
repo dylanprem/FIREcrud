@@ -17,6 +17,16 @@ router.get("/test", (req, res) => {
 // @desc    Test route
 // @access  Public
 router.get("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", false);
   itemsRef.on(
     "value",
     function(snapshot) {
