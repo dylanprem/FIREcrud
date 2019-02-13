@@ -17,13 +17,29 @@ router.get("/test", (req, res) => {
 });
 
 //options
-router.options("/", cors());
+router.options("/*", cors());
 
 // @route   GET api/GET/
 // @desc    Test route
 // @access  Public
 router.get("/", cors(), (req, res) => {
   itemsRef.once(
+    "value",
+    function(snapshot) {
+      res.json(snapshot);
+    },
+    function(errorObject) {
+      res.json({ "The read failed": errorObject.code });
+    }
+  );
+});
+
+// @route   GET api/GET/:id
+// @desc    Test route
+// @access  Public
+router.get("/:id", cors(), (req, res) => {
+  const itemRef = db.ref(`items/${req.params.id}`);
+  itemRef.once(
     "value",
     function(snapshot) {
       res.json(snapshot);

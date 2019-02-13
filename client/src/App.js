@@ -4,12 +4,14 @@ import "./App.css";
 
 //Components
 import Landing from "./components/Landing";
+import EditItem from "./components/child-components/EditItem";
 
 class App extends Component {
   render() {
     return (
       <Router>
         <Route exact path="/" component={Landing} />
+        <Route exact path="/edit" component={EditItem} />
       </Router>
     );
   }

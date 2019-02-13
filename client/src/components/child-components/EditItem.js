@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class AddItem extends Component {
+class EditItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,4 +68,4 @@ class AddItem extends Component {
   }
 }
 
-export default AddItem;
+export default EditItem;

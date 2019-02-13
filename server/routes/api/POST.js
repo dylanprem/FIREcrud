@@ -9,6 +9,9 @@ const firebase = require("firebase-admin");
 const db = firebase.database();
 const itemsRef = db.ref("items");
 
+// Load Input Validation
+const validateInput = require("../../validation/validation");
+
 //options
 router.options("/", cors());
 
@@ -16,6 +19,13 @@ router.options("/", cors());
 // @desc    post to db
 // @access  Public
 router.post("/", cors(), (req, res) => {
+  const { errors, isValid } = validateInput(req.body);
+
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   itemsRef
     .push()
     .set({
@@ -26,7 +36,7 @@ router.post("/", cors(), (req, res) => {
       res.status(200).json({ success: "Successfully Posted" });
     })
     .catch(err => {
-      res.status(404).json({ Error: err.code });
+      res.status(404).json({ bad: err.code });
     });
 });
 

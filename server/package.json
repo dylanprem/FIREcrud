@@ -17,7 +17,8 @@
     "express": "^4.16.4",
     "firebase": "^5.8.2",
     "firebase-admin": "^7.0.0",
-    "method-override": "^3.0.0"
+    "method-override": "^3.0.0",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
