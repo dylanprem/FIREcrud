@@ -23,10 +23,10 @@ router.options("/", cors());
 // @desc    Test route
 // @access  Public
 router.get("/", cors(), (req, res) => {
-  itemsRef.on(
+  itemsRef.once(
     "value",
     function(snapshot) {
-      res.json(snapshot.val());
+      res.json(snapshot);
     },
     function(errorObject) {
       res.json({ "The read failed": errorObject.code });

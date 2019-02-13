@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-// Cors middleware
+//cors
 const cors = require("cors");
 
 // Firebase
 const firebase = require("firebase-admin");
 const db = firebase.database();
 
-//options for delte req
-router.options("/:id", cors());
+//options
+router.options("/*", cors());
 
 // @route   DELETE api/DELETE/:id
 // @desc    delete an item
@@ -18,8 +18,8 @@ router.delete("/:id", cors(), (req, res) => {
   const itemsRef = db.ref(`items/${req.params.id}`);
   itemsRef
     .remove()
-    .then(res => {
-      res.status(200).json({ success: "Removed" });
+    .then(deleted => {
+      res.status(200).json({ success: "Successfully Deleted" });
     })
     .catch(err => {
       res.json({ Failed: err.code });
