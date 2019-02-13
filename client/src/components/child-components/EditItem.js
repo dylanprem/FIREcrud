@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import firePhoto from "../../img/firebase.png";
-import isEmpty from "../../validation/is-empty";
+
 
 class EditItem extends Component {
   constructor(props) {
@@ -42,7 +42,6 @@ class EditItem extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const items = {
-      id: this.state.editingId,
       item: this.item.value,
       date: new Date()
     } 
@@ -52,26 +51,24 @@ class EditItem extends Component {
         console.log(res);
         console.log(res.data);
         this.setState({ errors: {} });
+        this.props.history.push("/");
       })
       .catch(err => {
         console.log(err.response.data);
         this.setState({ errors: err.response.data });
       });
-    this.props.history.push("/");
   };
 
   render() {
     let itemToEdit;
-
-    if(!isEmpty(this.state.item)){
       
-        itemToEdit = (
-          <div>
-            <input name="item" type="text" defaultValue={this.state.item.item} ref={(item) => this.item = this.state.item} onChange={this.handleChange} className="form-control" />
-          </div>
-        )
+    itemToEdit = (
+      <div>
+        <input name="item" type="text" defaultValue={this.state.item.item} ref={(item) => this.item = item} onChange={this.handleChange} className="form-control" />
+      </div>
+    )
       
-    }
+    
     
     const { errors } = this.state;
     return (
