@@ -18,7 +18,9 @@ router.patch("/:id", cors(), (req, res) => {
   const itemsRef = db.ref(`items/${req.params.id}`);
   itemsRef
     .update({
-      item: req.body.item
+      id: req.params.id,
+      item: req.body.item,
+      date: req.body.date
     })
     .then(items => res.json(items))
     .catch(err => res.json(err.code));

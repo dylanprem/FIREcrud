@@ -1,15 +1,38 @@
 import React, { Component } from "react";
 import axios from "axios";
+import firePhoto from "../../img/firebase.png";
+import isEmpty from "../../validation/is-empty";
 
 class EditItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: "",
+      items:[],
+      item: {},
+      editingId: this.props.match.params.id,
       errors: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    
+      this.getItemToEdit();
+    
+  }
+
+  getItemToEdit = () => {
+    axios
+      .get(`http://localhost:5000/api/GET/${this.state.editingId}`)
+      .then(res => {
+        const item = res.data;
+        this.setState({ item });
+        console.log(item);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   handleChange = e => {
@@ -19,51 +42,72 @@ class EditItem extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const items = {
-      item: this.state.item,
+      id: this.state.editingId,
+      item: this.item.value,
       date: new Date()
-    };
-
+    } 
     axios
-      .post(`http://localhost:5000/api/POST`, items)
+      .patch(`http://localhost:5000/api/PATCH/${this.state.editingId}`, items)
       .then(res => {
         console.log(res);
         console.log(res.data);
-        this.setState({ item: "" });
         this.setState({ errors: {} });
       })
       .catch(err => {
         console.log(err.response.data);
         this.setState({ errors: err.response.data });
       });
+    this.props.history.push("/");
   };
 
   render() {
+    let itemToEdit;
+
+    if(!isEmpty(this.state.item)){
+      
+        itemToEdit = (
+          <div>
+            <input name="item" type="text" defaultValue={this.state.item.item} ref={(item) => this.item = this.state.item} onChange={this.handleChange} className="form-control" />
+          </div>
+        )
+      
+    }
+    
     const { errors } = this.state;
     return (
-      <div className="col-md-8 offset-md-2 mt-3">
+      <div className="container">
+        <div className="row mt-3">
+          <img
+            src={firePhoto}
+            className="img-fluid d-block mx-auto fire-icon"
+            alt="Firebase"
+          />
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <h1 className="display-1 text-info text-center">
+              FIRE<span className="text-muted">crud</span>
+            </h1>
+          </div>
+        </div>
+        <div className="row">
+        <div className="col-md-8 offset-md-2 mt-3">
         <form onSubmit={this.handleSubmit}>
+        
           <div className="form-group">
-            <input
-              type="text"
-              name="item"
-              value={this.state.item}
-              onChange={this.handleChange}
-              className={
-                errors.item && errors
-                  ? "form-control form-control-lg is-invalid"
-                  : "form-control form-control-lg"
-              }
-              placeholder="Enter an item here"
-            />
+            {itemToEdit}
             <div className="invalid-feedback">{errors.item}</div>
             <input
               type="submit"
               value="Submit"
-              className="btn btn-lg btn-info mt-3 btn-block"
+              className="text-muted btn btn-lg btn-warning mt-3 btn-block"
             />
           </div>
         </form>
       </div>
+        </div>
+      </div>
+      
     );
   }
 }

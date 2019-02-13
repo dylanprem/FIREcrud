@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import firePhoto from "../img/firebase.png";
-import AddItem from "../components/child-components/AddItem";
 import ListItems from "../components/child-components/ListItems";
 
 class Landing extends Component {
@@ -20,9 +19,6 @@ class Landing extends Component {
               FIRE<span className="text-muted">crud</span>
             </h1>
           </div>
-        </div>
-        <div className="row">
-          <AddItem />
         </div>
         <div className="row">
           <ListItems />
