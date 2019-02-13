@@ -106,7 +106,7 @@ class About extends Component {
       </div>
       <div className="row">
       <div className="col-md-8 offset-md-2">
-      <p className="text-muted">This was a bit tricky. In the root directory i created a .env file to store my firebase credntials.</p> 
+      <p className="text-muted">This was a bit tricky. In the root directory I created a .env file to store my firebase credntials.</p> 
       <p className="text-muted">Follow <Link to="/firebase-setup"> these steps </Link> to create a firebase project.</p>
       <p className="text-muted">For more precise instructions on how to set up firebase for your node.js app, check out the <Link to="/firebase-admin-setup">docs.</Link></p>
       
@@ -120,7 +120,7 @@ class About extends Component {
       admin.initializeApp({
         credential: admin.credential.cert({
           projectId: process.env.FIREBASE_PROJECT_ID,
-          privateKey: process.env.ACCOUNT_KEY.replace(/\\n/g, "\n"),
+          privateKey: process.env.ACCOUNT_KEY.replace(someRegex),
           clientEmail: process.env.CLIENT_EMAIL
         }),
         apiKey: process.env.FIREBASE_API_KEY,
