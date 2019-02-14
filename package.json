@@ -2,13 +2,13 @@
   "name": "firecrud",
   "version": "1.0.0",
   "description": "FIREcrud",
-  "main": "server/server.js",
+  "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server/server.js",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"cd server && npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
@@ -22,6 +22,17 @@
   },
   "homepage": "https://github.com/dylanprem/FIREcrud#readme",
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "firebase": "^5.8.2",
+    "firebase-admin": "^7.0.0",
+    "method-override": "^3.0.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
