@@ -2,7 +2,7 @@
   "name": "firecrud",
   "version": "1.0.0",
   "description": "FIREcrud",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
