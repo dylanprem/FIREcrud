@@ -21,7 +21,7 @@ class EditItem extends Component {
 
   getItemToEdit = () => {
     axios
-      .get(`https://firecrud.herokupp.com/api/GET/${this.state.editingId}`)
+      .get(`https://firecrud.herokuapp.com/api/GET/${this.state.editingId}`)
       .then(res => {
         const item = res.data;
         this.setState({ item });
@@ -43,7 +43,7 @@ class EditItem extends Component {
       date: new Date()
     };
     axios
-      .patch(`https://firecrud.herokupp.com/api/PATCH/${this.state.editingId}`, items)
+      .patch(`https://firecrud.herokuapp.com/api/PATCH/${this.state.editingId}`, items)
       .then(res => {
         console.log(res);
         console.log(res.data);
