@@ -34,7 +34,7 @@ class ListItems extends Component {
     };
 
     axios
-      .post(`https://firecrud.herokuapp.com/api/POST`, items)
+      .post(`http://localhost:5000/api/POST`, items)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -52,7 +52,7 @@ class ListItems extends Component {
 
   getItems = () => {
     axios
-      .get(`https://firecrud.herokuapp.com/api/GET/`)
+      .get(`http://localhost:5000/api/GET/`)
       .then(res => {
         console.log(res);
         const items = res.data;
@@ -67,7 +67,7 @@ class ListItems extends Component {
   burnData = id => {
     this.setState({ burning: true });
     axios
-      .delete(`https://firecrud.herokuapp.com/api/DELETE/${id}`)
+      .delete(`http://localhost:5000/api/DELETE/${id}`)
       .then(res => {
         console.log(res);
         this.getItems();

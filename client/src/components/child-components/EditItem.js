@@ -21,10 +21,10 @@ class EditItem extends Component {
 
   getItemToEdit = () => {
     axios
-      .get(`https://firecrud.herokuapp.com/api/GET/${this.state.editingId}`)
+      .get(`http://localhost:5000/api/GET/${this.state.editingId}`)
       .then(res => {
         const item = res.data;
-        this.setState({ item });
+        this.setState({ item, errors: {} });
         console.log(item);
       })
       .catch(function(error) {
@@ -43,7 +43,7 @@ class EditItem extends Component {
       date: new Date()
     };
     axios
-      .patch(`https://firecrud.herokuapp.com/api/PATCH/${this.state.editingId}`, items)
+      .patch(`http://localhost:5000/api/PATCH/${this.state.editingId}`, items)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -51,6 +51,8 @@ class EditItem extends Component {
         this.props.history.push("/");
       })
       .catch(err => {
+        console.log(err);
+        console.log(err.response);
         console.log(err.response.data);
         this.setState({ errors: err.response.data });
       });
@@ -58,7 +60,8 @@ class EditItem extends Component {
 
   render() {
     let itemToEdit;
-
+    let errMsg;
+    const {errors} = this.state;
     itemToEdit = (
       <div>
         <input
@@ -67,12 +70,18 @@ class EditItem extends Component {
           defaultValue={this.state.item.item}
           ref={item => (this.item = item)}
           onChange={this.handleChange}
-          className="form-control"
+          className={
+            errors.item && errors
+              ? "form-control form-control-lg is-invalid"
+              : "form-control form-control-lg"
+          }
         />
       </div>
     );
-
-    const { errors } = this.state;
+    
+    errMsg = (
+      <small className="text-danger">{ errors.item }</small>
+    )
     return (
       <div className="container">
         <div className="row mt-3">
@@ -94,7 +103,7 @@ class EditItem extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 {itemToEdit}
-                <div className="invalid-feedback">{errors.item}</div>
+                {errMsg}
                 <input
                   type="submit"
                   value="Submit"
