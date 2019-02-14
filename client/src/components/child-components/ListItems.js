@@ -53,6 +53,7 @@ class ListItems extends Component {
     axios
       .get(`http://localhost:5000/api/GET/`)
       .then(res => {
+        console.log(res);
         const items = res.data;
         this.setState({ items, burning: false, posting: false, errors: {} });
       })
@@ -97,7 +98,7 @@ class ListItems extends Component {
               type="submit"
               value="Submit"
               className={
-                this.state.posting === true
+                this.state.posting
                   ? "btn btn-lg btn-success mt-3 btn-block"
                   : "btn btn-lg btn-info mt-3 btn-block"
               }
@@ -110,11 +111,7 @@ class ListItems extends Component {
     if (!isEmpty(this.state.items)) {
       tableRow = Object.keys(this.state.items).map(i => (
         <tr key={i}>
-          <td
-            className={
-              this.state.burning === true ? "text-danger" : "text-muted"
-            }
-          >
+          <td className={this.state.burning ? "text-danger" : "text-muted"}>
             {this.state.items[i].item}
           </td>
           <td>
@@ -125,7 +122,7 @@ class ListItems extends Component {
           <td>
             <button
               className={
-                this.state.burning === true
+                this.state.burning
                   ? "btn btn-danger text-light"
                   : "btn btn-warning text-muted"
               }
@@ -140,7 +137,7 @@ class ListItems extends Component {
       tableRow = (
         <tr>
           <td className="text-danger">
-            <h3 className>NO DATA</h3>
+            <h3>NO DATA</h3>
           </td>
         </tr>
       );

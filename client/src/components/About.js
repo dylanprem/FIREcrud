@@ -39,16 +39,16 @@ class About extends Component {
           <div className="col-md-8 offset-md-2">
             <p className="text-muted">
               FIREcrud is a simple CRUD application built with the FERN stack
-              (Firebase, Express, React, Node.js). It's simple yet complex build
-              should hopefully shed some light on how to use Firebase as a
-              server-side framework.
+              (Firebase, Express, React, Node.js). It's simple and should
+              hopefully shed some light on how to use Firebase as a server-side
+              framework.
             </p>
           </div>
         </div>
         <div className="row mt-3">
           <div className="col-md-8 offset-md-2">
             <h1 className="text-warning">
-              The backend <small className="text-muted">Building our API</small>
+              The backend <small className="text-muted">our API</small>
             </h1>
           </div>
         </div>
@@ -106,12 +106,22 @@ router.get("/", cors(), (req, res) => {
               </code>
             </pre>
           </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-8 offset-md-2">
+            <h1 className="text-warning">
+              The client <small className="text-muted">our React app</small>
+            </h1>
+          </div>
+        </div>
+        <div className="row mt-3">
           <div className="col-md-8 offset-md-2">
             <p className="text-muted">
-              In our React application we'll call our getItems function inside
-              of the componentDidMount life-cycle. We are also passing any
-              potential server-side errors to our errors object that we'd create
-              in the react component.
+              In our React application "ListItems" component, we'll call our
+              getItems function inside of the componentDidMount life-cycle via
+              Axios. We are also passing any potential server-side errors to our
+              errors object that we'd create in the react component. The console
+              will return our results when the DOM is loaded.
             </p>
           </div>
           <div className="col-md-8 offset-md-2">
@@ -148,6 +158,40 @@ getItems = () => {
                 `}
               </code>
             </pre>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-8 offset-md-2">
+            <h1 className="text-warning">
+              Summary{" "}
+              <small className="text-muted">and honorable mentions</small>
+            </h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md8 offset-md-2">
+            <p className="text-muted">
+              Full stack development may be a difficult task, but if you start
+              small, you can build something huge!
+            </p>
+            <h3 className="text-info">Shout outs:</h3>
+            <p className="text-muted">
+              <strong>Postman</strong> for testing routes.
+            </p>
+            <p className="text-muted">
+              <strong>Concurrently</strong> for simultaneously running our
+              server and client.
+            </p>
+            <p className="text-muted">
+              <strong>Axios</strong> for graceful API requests.
+            </p>
+            <p className="text-muted">
+              <strong>Prism</strong> for adding beautiful code snippets to your
+              projects.
+            </p>
+            <p className="text-muted">
+              <strong>Bootstrap 4</strong> is super nice.
+            </p>
           </div>
         </div>
       </div>

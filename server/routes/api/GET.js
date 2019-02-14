@@ -26,7 +26,7 @@ router.options("/*", cors());
 router.get("/", cors(), (req, res) => {
   itemsRef
     .once("value")
-    .then(snapshot => res.json(snapshot))
+    .then(snapshot => res.status(200).json(snapshot))
     .catch(err => res.status(401).json(err.code));
 });
 
@@ -37,7 +37,7 @@ router.get("/:id", cors(), (req, res) => {
   const itemRef = db.ref(`items/${req.params.id}`);
   itemRef
     .once("value")
-    .then(snapshot => res.json(snapshot))
+    .then(snapshot => res.status(200).json(snapshot))
     .catch(err => res.status(401).json(err.code));
 });
 
