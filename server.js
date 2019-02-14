@@ -10,7 +10,7 @@ const admin = require("firebase-admin");
 admin.initializeApp({
   credential: admin.credential.cert({
     projectId: process.env.FIREBASE_PROJECT_ID,
-    privateKey: process.env.ACCOUNT_KEY,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
     clientEmail: process.env.CLIENT_EMAIL
   }),
   apiKey: process.env.FIREBASE_API_KEY,
