@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import firePhoto from "../img/firebase.png";
 import ListItems from "../components/child-components/ListItems";
+import { Link } from "react-router-dom";
 
 class Landing extends Component {
   render() {
     return (
       <div className="container">
+        <div className="row mt-3">
+          <Link to="/about" className="text-info">
+            <h3>About</h3>
+          </Link>
+        </div>
         <div className="row mt-3">
           <img
             src={firePhoto}

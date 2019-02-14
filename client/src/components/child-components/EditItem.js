@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import firePhoto from "../../img/firebase.png";
 
-
 class EditItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items:[],
+      items: [],
       item: {},
       editingId: this.props.match.params.id,
       errors: {}
@@ -16,10 +15,8 @@ class EditItem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount(){
-    
-      this.getItemToEdit();
-    
+  componentDidMount() {
+    this.getItemToEdit();
   }
 
   getItemToEdit = () => {
@@ -33,7 +30,7 @@ class EditItem extends Component {
       .catch(function(error) {
         console.log(error);
       });
-  }
+  };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -44,7 +41,7 @@ class EditItem extends Component {
     const items = {
       item: this.item.value,
       date: new Date()
-    } 
+    };
     axios
       .patch(`http://localhost:5000/api/PATCH/${this.state.editingId}`, items)
       .then(res => {
@@ -61,15 +58,20 @@ class EditItem extends Component {
 
   render() {
     let itemToEdit;
-      
+
     itemToEdit = (
       <div>
-        <input name="item" type="text" defaultValue={this.state.item.item} ref={(item) => this.item = item} onChange={this.handleChange} className="form-control" />
+        <input
+          name="item"
+          type="text"
+          defaultValue={this.state.item.item}
+          ref={item => (this.item = item)}
+          onChange={this.handleChange}
+          className="form-control"
+        />
       </div>
-    )
-      
-    
-    
+    );
+
     const { errors } = this.state;
     return (
       <div className="container">
@@ -88,23 +90,21 @@ class EditItem extends Component {
           </div>
         </div>
         <div className="row">
-        <div className="col-md-8 offset-md-2 mt-3">
-        <form onSubmit={this.handleSubmit}>
-        
-          <div className="form-group">
-            {itemToEdit}
-            <div className="invalid-feedback">{errors.item}</div>
-            <input
-              type="submit"
-              value="Submit"
-              className="text-muted btn btn-lg btn-warning mt-3 btn-block"
-            />
+          <div className="col-md-8 offset-md-2 mt-3">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                {itemToEdit}
+                <div className="invalid-feedback">{errors.item}</div>
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="text-muted btn btn-lg btn-warning mt-3 btn-block"
+                />
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
         </div>
       </div>
-      
     );
   }
 }

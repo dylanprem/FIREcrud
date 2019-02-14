@@ -5,138 +5,154 @@ import "../css/prism.css";
 import { Link } from "react-router-dom";
 
 class About extends Component {
-  componentDidMount(){
+  componentDidMount() {
     Prism.highlightAll();
   }
   render() {
     return (
       <div className="container">
-      <div className="row mt-3">
-      <img
-      src={firePhoto}
-      className="img-fluid d-block mx-auto fire-icon"
-      alt="Firebase"
-      />
-      </div>
-      <div className="row">
-      <div className="col-md-12">
-      <h1 className="display-1 text-info text-center">
-      FIRE<span className="text-muted">crud</span>
-      </h1>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <h1 className="text-info">What is FIREcrud?</h1>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <p className="text-muted">FIREcrud is a simple CRUD application built with the FERN stack (Firebase, Express, React, Node.js). 
-      It's simple yet complex build should hopefully shed some light on how to use Firebase as a server-side framework.</p>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <h1 className="text-warning">The backend <small className="text-muted">Server setup</small></h1>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <p className="text-muted">So first we'll cd into our project directory, and mkdir our server directory, then touch server.js.</p> 
-      <p className="text-muted">Here we set up our express server. I started with requiring a few dependencies and middleware.</p>
-      </div>
-      <div className="col-md-8 offset-md-2">
-      <pre><code className="language-javascript">{`
-      const express = require("express");
-      const methodOverride = require("method-override");
-      const bodyParser = require("body-parser");
-      const dotenv = require("dotenv");
-      dotenv.config();
-      
-      app.use((req, res, next) => {
-        res.append("Access-Control-Allow-Origin", ["*"]);
-        res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-        res.append("Access-Control-Allow-Headers", "Content-Type");
-        next();
-      });
-      
-      const port = process.env.PORT || 5000;
-      
-      app.listen(port, () => console.log(Server is running));
-      
-      `}</code></pre>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <h1 className="text-warning">The backend <small className="text-muted">Routes setup</small></h1>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <p className="text-muted">Next we'll establish our routes. From the root directory, mkdir routes/api && cd routes/api. Then touch GET.js POST.js PATCH.js DELETE.js.</p> 
-      <p className="text-muted">Now we need to tell our server to use these routes.</p>
-      <small className="text-danger">If you're route files are empty, then you will get errors. If they're empty just add these lines in and then comment out the app.use lines until your routes are ready to use.</small>
-      </div>
-      <div className="col-md-8 offset-md-2">
-      <pre><code className="language-javascript">{`
-      { Requires ... }
-      const GET_ROUTES = require("./routes/api/GET");
-      const POST_ROUTES = require("./routes/api/POST");
-      const PATCH_ROUTES = require("./routes/api/PATCH");
-      const DELETE_ROUTES = require("./routes/api/DELETE");
-      
-      const app = express();
-      { Middleware ... }
-
-      // Use Routes
-      app.use("/api/GET", GET_ROUTES);
-      app.use("/api/POST", POST_ROUTES);
-      app.use("/api/PATCH", PATCH_ROUTES);
-      app.use("/api/DELETE", DELETE_ROUTES);
-      
-      `}</code></pre>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <h1 className="text-warning">The backend <small className="text-muted">Firebase setup</small></h1>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8 offset-md-2">
-      <p className="text-muted">This was a bit tricky. In the root directory I created a .env file to store my firebase credntials.</p> 
-      <p className="text-muted">Follow <Link to="/firebase-setup"> these steps </Link> to create a firebase project.</p>
-      <p className="text-muted">For more precise instructions on how to set up firebase for your node.js app, check out the <Link to="/firebase-admin-setup">docs.</Link></p>
-      
-      </div>
-      <div className="col-md-8 offset-md-2">
-      <pre><code className="language-javascript">{`
-      { Requires ... }
-      // Firebase middleware
-      const admin = require("firebase-admin");
-
-      admin.initializeApp({
-        credential: admin.credential.cert({
-          projectId: process.env.FIREBASE_PROJECT_ID,
-          privateKey: process.env.ACCOUNT_KEY.replace(someRegex),
-          clientEmail: process.env.CLIENT_EMAIL
-        }),
-        apiKey: process.env.FIREBASE_API_KEY,
-        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-        databaseURL: process.env.FIREBASE_DATABASE_URL,
-        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: process.env.FIREBASE_MESSAGE_SENDER_ID
-      });
-      
-      `}</code></pre>
-      </div>
-      </div>
-      </div>
-      );
-    }
+        <div className="row mt-3">
+          <Link to="/" className="text-info">
+            <h3>Home</h3>
+          </Link>
+        </div>
+        <div className="row mt-3">
+          <img
+            src={firePhoto}
+            className="img-fluid d-block mx-auto fire-icon"
+            alt="Firebase"
+          />
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-12">
+            <h1 className="display-1 text-info text-center">
+              FIRE<span className="text-muted">crud</span>
+            </h1>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-8 offset-md-2">
+            <h1 className="text-info">What is FIREcrud?</h1>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-8 offset-md-2">
+            <p className="text-muted">
+              FIREcrud is a simple CRUD application built with the FERN stack
+              (Firebase, Express, React, Node.js). It's simple yet complex build
+              should hopefully shed some light on how to use Firebase as a
+              server-side framework.
+            </p>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-8 offset-md-2">
+            <h1 className="text-warning">
+              The backend <small className="text-muted">Building our API</small>
+            </h1>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-8 offset-md-2">
+            <p className="text-muted">
+              The goal here was to build a RESTful API with Express and
+              Firebase, where our Client side React app can GET information
+              from, and also POST, PATCH {`(`}edit{`)`}, and DELETE information
+              as well. I had also set up error handling on the server side which
+              I eventually pass to the client side.
+            </p>
+            <p className="text-dark">
+              With that being said, let's run through an entire GET requests
+              from server-side to client-side. The code below shows a Firebase
+              query for our "items" database. It returns a JSON object with all
+              of our items.
+            </p>
+          </div>
+          <div className="col-md-8 offset-md-2">
+            <pre>
+              <code className="language-javascript">
+                {`
+router.get("/", cors(), (req, res) => {
+  itemsRef
+    .once("value")
+    .then(snapshot => res.json(snapshot))
+    .catch(err => res.status(401).json(err.code));
+});            
+                `}
+              </code>
+            </pre>
+          </div>
+          <div className="col-md-8 offset-md-2">
+            <p className="text-muted">
+              If there's data, we should be able to see it in our localhost on
+              whatever port you've chosen to use.
+            </p>
+          </div>
+          <div className="col-md-8 offset-md-2">
+            <pre>
+              <code className="language-javascript">
+                {`
+{
+  "-LYch4E_9EUhzsTuBC3y": {
+  "date": "2019-02-13T21:43:45.100Z",
+  "item": "blah"
+  },
+  "-LYch9prBuFnuhsJu6b_": {
+  "date": "2019-02-13T21:13:01.585Z",
+  "item": "eyyo"
   }
-  
-  export default About;
-  
+}            
+                `}
+              </code>
+            </pre>
+          </div>
+          <div className="col-md-8 offset-md-2">
+            <p className="text-muted">
+              In our React application we'll call our getItems function inside
+              of the componentDidMount life-cycle. We are also passing any
+              potential server-side errors to our errors object that we'd create
+              in the react component.
+            </p>
+          </div>
+          <div className="col-md-8 offset-md-2">
+            <pre>
+              <code className="language-javascript">
+                {`
+class ListItems extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      errors: {}
+    };
+  }
+
+componentDidMount() {
+  this.getItems();
+}
+
+getItems = () => {
+  axios
+    .get('http://localhost:5000/api/GET/')
+    .then(res => {
+      const items = res.data;
+      this.setState({ items, errors: {} });
+    })
+    .catch(err => {
+      console.log(err.response.data);
+      this.setState({ errors: err.response.data });
+    });
+};
+
+...
+                `}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default About;

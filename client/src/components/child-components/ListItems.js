@@ -3,20 +3,18 @@ import axios from "axios";
 import isEmpty from "../../validation/is-empty";
 import { Link } from "react-router-dom";
 
-
 class ListItems extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
-      item:"",
+      item: "",
       burning: false,
       posting: false,
-      errors: {},
+      errors: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   componentDidMount() {
@@ -24,11 +22,11 @@ class ListItems extends Component {
   }
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({ posting: true })
+    this.setState({ posting: true });
     const items = {
       item: this.state.item,
       date: new Date()
@@ -39,8 +37,7 @@ class ListItems extends Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        console.log(res.data);
-        this.setState({ 
+        this.setState({
           item: "",
           errors: {}
         });
@@ -50,20 +47,21 @@ class ListItems extends Component {
         console.log(err.response.data);
         this.setState({ errors: err.response.data, posting: false });
       });
-  }
+  };
 
   getItems = () => {
     axios
       .get(`http://localhost:5000/api/GET/`)
       .then(res => {
         const items = res.data;
-        this.setState({ items, burning: false, posting: false});
+        this.setState({ items, burning: false, posting: false, errors: {} });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(err => {
+        console.log(err.response.data);
+        this.setState({ errors: err.response.data });
       });
-  }
-  
+  };
+
   burnData = id => {
     this.setState({ burning: true });
     axios
@@ -73,11 +71,11 @@ class ListItems extends Component {
         this.getItems();
       })
       .catch(error => console.log(error));
-  }
+  };
 
   render() {
     const { errors } = this.state;
-    
+
     const addItem = (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -98,17 +96,25 @@ class ListItems extends Component {
             <input
               type="submit"
               value="Submit"
-              className={this.state.posting === true ? "btn btn-lg btn-success mt-3 btn-block" : "btn btn-lg btn-info mt-3 btn-block" }
+              className={
+                this.state.posting === true
+                  ? "btn btn-lg btn-success mt-3 btn-block"
+                  : "btn btn-lg btn-info mt-3 btn-block"
+              }
             />
           </div>
         </form>
       </div>
-    )
+    );
     let tableRow;
     if (!isEmpty(this.state.items)) {
       tableRow = Object.keys(this.state.items).map(i => (
         <tr key={i}>
-          <td className={this.state.burning === true ? "text-danger" : "text-muted"}>
+          <td
+            className={
+              this.state.burning === true ? "text-danger" : "text-muted"
+            }
+          >
             {this.state.items[i].item}
           </td>
           <td>
@@ -134,15 +140,13 @@ class ListItems extends Component {
       tableRow = (
         <tr>
           <td className="text-danger">
-            <h1>No data</h1>
+            <h3 className>NO DATA</h3>
           </td>
         </tr>
       );
     }
     return (
-      
       <div className="col-md-8 offset-md-2 mt-5">
-        
         {addItem}
         <h1 className="text-warning text-center">Items</h1>
         <table className="table">
