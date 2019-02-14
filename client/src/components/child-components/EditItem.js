@@ -58,6 +58,7 @@ class EditItem extends Component {
 
   render() {
     let itemToEdit;
+    const {errors} = this.state;
 
     itemToEdit = (
       <div>
@@ -67,7 +68,7 @@ class EditItem extends Component {
           defaultValue={this.state.item.item}
           ref={item => (this.item = item)}
           onChange={this.handleChange}
-          className= {
+          className = {
             errors.item && errors
               ? "form-control form-control-lg is-invalid"
               : "form-control form-control-lg"
