@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 class Landing extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container mt-5 mb-5">
         <div className="row mt-3">
           <Link to="/about" className="text-info">
             <h3>About</h3>
