@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
@@ -10,7 +11,7 @@ const admin = require("firebase-admin");
 admin.initializeApp({
   credential: admin.credential.cert({
     projectId: process.env.FIREBASE_PROJECT_ID,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
     clientEmail: process.env.CLIENT_EMAIL
   }),
   apiKey: process.env.FIREBASE_API_KEY,
