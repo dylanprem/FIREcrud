@@ -17,6 +17,7 @@ class ListItems extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
   componentDidMount() {
     this.getItems();
   }
@@ -33,7 +34,7 @@ class ListItems extends Component {
     };
 
     axios
-      .post(`http://localhost:5000/api/POST`, items)
+      .post(`https://firecrud.herokuapp.com/api/POST`, items)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -51,7 +52,7 @@ class ListItems extends Component {
 
   getItems = () => {
     axios
-      .get(`http://localhost:5000/api/GET/`)
+      .get(`https://firecrud.herokuapp.com/api/GET/`)
       .then(res => {
         console.log(res);
         const items = res.data;
@@ -66,7 +67,7 @@ class ListItems extends Component {
   burnData = id => {
     this.setState({ burning: true });
     axios
-      .delete(`http://localhost:5000/api/DELETE/${id}`)
+      .delete(`https://firecrud.herokuapp.com/api/DELETE/${id}`)
       .then(res => {
         console.log(res);
         this.getItems();
