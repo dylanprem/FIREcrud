@@ -8,7 +8,7 @@ class Landing extends Component {
     return (
       <div className="container mt-5 mb-5">
         <div className="row mt-3">
-          <div>
+          <div className="col-md-12">
             <Link to="/about" className="text-info">
               <h3>About</h3>
             </Link>
