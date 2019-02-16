@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import API from "../../api";
 import isEmpty from "../../validation/is-empty";
 import { Link } from "react-router-dom";
 
@@ -32,8 +32,7 @@ class ListItems extends Component {
       date: new Date()
     };
 
-    axios
-      .post(`https://firecrud.herokuapp.com/api/POST`, items)
+    API.post(`/api/POST`, items)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -50,8 +49,7 @@ class ListItems extends Component {
   };
 
   getItems = () => {
-    axios
-      .get(`https://firecrud.herokuapp.com/api/GET/`)
+    API.get(`/api/GET/`)
       .then(res => {
         console.log(res);
         const items = res.data;
@@ -65,8 +63,7 @@ class ListItems extends Component {
 
   burnData = id => {
     this.setState({ burning: true });
-    axios
-      .delete(`https://firecrud.herokuapp.com/api/DELETE/${id}`)
+    API.delete(`/api/DELETE/${id}`)
       .then(res => {
         console.log(res);
         this.getItems();

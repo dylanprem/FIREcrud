@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import API from "../../api";
 import firePhoto from "../../img/firebase.png";
 
 class EditItem extends Component {
@@ -19,8 +19,7 @@ class EditItem extends Component {
   }
 
   getItemToEdit = () => {
-    axios
-      .get(`https://firecrud.herokuapp.com/api/GET/${this.state.editingId}`)
+    API.get(`/api/GET/${this.state.editingId}`)
       .then(res => {
         const item = res.data;
         this.setState({ item });
@@ -41,11 +40,7 @@ class EditItem extends Component {
       item: this.item.value,
       date: new Date()
     };
-    axios
-      .patch(
-        `https://firecrud.herokuapp.com/api/PATCH/${this.state.editingId}`,
-        updatedItem
-      )
+    API.patch(`/api/PATCH/${this.state.editingId}`, updatedItem)
       .then(res => {
         console.log(res);
         console.log(res.data);
