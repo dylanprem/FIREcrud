@@ -12,9 +12,11 @@ class About extends Component {
     return (
       <div className="container mt-5 mb-5">
         <div className="row mt-3">
-          <Link to="/" className="text-info">
-            <h3>Home</h3>
-          </Link>
+          <div className="col-md-12">
+            <Link to="/" className="text-info">
+              <h3>Home</h3>
+            </Link>
+          </div>
         </div>
         <div className="row mt-3">
           <img

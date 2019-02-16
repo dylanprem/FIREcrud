@@ -17,7 +17,6 @@ class ListItems extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
   componentDidMount() {
     this.getItems();
   }
@@ -115,12 +114,12 @@ class ListItems extends Component {
           <td className={this.state.burning ? "text-danger" : "text-muted"}>
             {this.state.items[i].item}
           </td>
-          <td>
+          <td className="text-center">
             <Link to={`/edit/${i}`} className="btn btn-info">
               <i className="fas fa-edit" /> Edit
             </Link>
           </td>
-          <td>
+          <td className="text-right">
             <button
               className={
                 this.state.burning
@@ -147,7 +146,7 @@ class ListItems extends Component {
       <div className="col-md-8 offset-md-2 mt-5">
         {addItem}
         <h1 className="text-warning text-center">Items</h1>
-        <table className="table">
+        <table className="table hover">
           <thead>
             <tr>
               <th>Item</th>

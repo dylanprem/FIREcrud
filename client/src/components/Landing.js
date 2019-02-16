@@ -8,9 +8,11 @@ class Landing extends Component {
     return (
       <div className="container mt-5 mb-5">
         <div className="row mt-3">
-          <Link to="/about" className="text-info">
-            <h3>About</h3>
-          </Link>
+          <div>
+            <Link to="/about" className="text-info">
+              <h3>About</h3>
+            </Link>
+          </div>
         </div>
         <div className="row mt-3">
           <img
