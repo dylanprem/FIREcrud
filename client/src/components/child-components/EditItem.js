@@ -6,7 +6,6 @@ class EditItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
       item: {},
       editingId: this.props.match.params.id,
       errors: {}
@@ -21,7 +20,7 @@ class EditItem extends Component {
 
   getItemToEdit = () => {
     axios
-      .get(`http://localhost:5000/api/GET/${this.state.editingId}`)
+      .get(`https://firecrud.herokuapp.com/api/GET/${this.state.editingId}`)
       .then(res => {
         const item = res.data;
         this.setState({ item });
@@ -38,12 +37,15 @@ class EditItem extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const items = {
+    const updatedItem = {
       item: this.item.value,
       date: new Date()
     };
     axios
-      .patch(`http://localhost:5000/api/PATCH/${this.state.editingId}`, items)
+      .patch(
+        `https://firecrud.herokuapp.com/api/PATCH/${this.state.editingId}`,
+        updatedItem
+      )
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -58,21 +60,26 @@ class EditItem extends Component {
 
   render() {
     let itemToEdit;
+    const { errors } = this.state;
 
     itemToEdit = (
-      <div>
+      <div className="form-group">
         <input
           name="item"
           type="text"
           defaultValue={this.state.item.item}
           ref={item => (this.item = item)}
           onChange={this.handleChange}
-          className="form-control"
+          className={
+            errors && errors.item
+              ? "form-control form-control-lg is-invalid"
+              : "form-control form-control-lg"
+          }
         />
+        <div className="invalid-feedback">{errors.item}</div>
       </div>
     );
 
-    const { errors } = this.state;
     return (
       <div className="container">
         <div className="row mt-3">
@@ -94,7 +101,7 @@ class EditItem extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 {itemToEdit}
-                <div className="invalid-feedback">{errors.item}</div>
+
                 <input
                   type="submit"
                   value="Submit"
