@@ -68,7 +68,7 @@ class ListItems extends Component {
     axios
       .delete(`http://localhost:5000/api/DELETE/${id}`)
       .then(res => {
-        console.log(res);
+        console.log(res.data);
         this.getItems();
       })
       .catch(error => console.log(error));
