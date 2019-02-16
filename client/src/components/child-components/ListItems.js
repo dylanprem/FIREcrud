@@ -146,7 +146,7 @@ class ListItems extends Component {
       <div className="col-md-8 offset-md-2 mt-5">
         {addItem}
         <h1 className="text-warning text-center">Items</h1>
-        <table className="table hover">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>Item</th>
