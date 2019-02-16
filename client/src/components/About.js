@@ -10,7 +10,7 @@ class About extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container mt-5 mb-5">
         <div className="row mt-3">
           <Link to="/" className="text-info">
             <h3>Home</h3>
@@ -59,13 +59,10 @@ class About extends Component {
               Firebase, where our Client side React app can GET information
               from, and also POST, PATCH {`(`}edit{`)`}, and DELETE information
               as well. I had also set up error handling on the server side which
-              I eventually pass to the client side.
-            </p>
-            <p className="text-dark">
-              With that being said, let's run through an entire GET requests
-              from server-side to client-side. The code below shows a Firebase
-              query for our "items" database. It returns a JSON object with all
-              of our items.
+              I eventually pass to the client side. With that being said, let's
+              run through an entire GET requests from server-side to
+              client-side. The code below shows a GET request to our Firebase
+              "items" database. It returns a JSON object with all of our items.
             </p>
           </div>
           <div className="col-md-8 offset-md-2">
@@ -117,11 +114,15 @@ router.get("/", cors(), (req, res) => {
         <div className="row mt-3">
           <div className="col-md-8 offset-md-2">
             <p className="text-muted">
-              In our React application "ListItems" component, we'll call our
-              getItems function inside of the componentDidMount life-cycle via
-              Axios. We are also passing any potential server-side errors to our
-              errors object that we'd create in the react component. The console
-              will return our results when the DOM is loaded.
+              In our React application{" "}
+              <span className="text-info">ListItems</span> component, we'll call
+              our
+              <span className="text-warning">getItems</span> function inside of
+              the componentDidMount life-cycle via Axios. We are also passing
+              any potential server-side errors to our errors state if any exist.
+              We pass res.data into our items state so that we can display the
+              data in our DOM. The console will return our response and/or
+              errors when the DOM is loaded.
             </p>
           </div>
           <div className="col-md-8 offset-md-2">
@@ -163,16 +164,12 @@ getItems = () => {
         <div className="row mt-3">
           <div className="col-md-8 offset-md-2">
             <h1 className="text-warning">
-              Summary{" "}
-              <small className="text-muted">and honorable mentions</small>
+              Summary
+              <small className="text-muted"> and honorable mentions</small>
             </h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md8 offset-md-2">
             <p className="text-muted">
-              Full stack development may be a difficult task, but if you start
-              small, you can build something huge!
+              Firebase works great with React, Node and Express! Hope this helps
+              you build your next app.
             </p>
             <h3 className="text-info">Shout outs:</h3>
             <p className="text-muted">
