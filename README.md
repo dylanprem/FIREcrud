@@ -10,7 +10,7 @@ Add your config keys and values to a .env file (DO NOT COMMIT THIS FILE)
 
 cd FIREcrud && npm i 
 
-cd .. && cd client && npm i 
+cd client && npm i 
 
 cd .. && npm run dev
 
